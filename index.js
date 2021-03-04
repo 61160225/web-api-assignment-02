@@ -4,12 +4,15 @@ const app = express()
 app.use(express.json())
 let books = []
 
+
 app.post('/books', (req, res) => {
+    
     let newTitle = req.body.title
     let newPrice = req.body.price
     let newUnit = req.body.unit
     let newIsbn = req.body.isbn
     let newImage = req.body.image_url
+
 
     let newBook = {
         title: newTitle,
@@ -21,7 +24,7 @@ app.post('/books', (req, res) => {
 
     let bookID = 0
 
-
+  
     books.push(newBook)
 
 
@@ -30,6 +33,19 @@ app.post('/books', (req, res) => {
  
 
     res.status(201).json(bookID)
+})
+
+app.get('/books/:id', (req, res) => {
+    
+    let id = req.params.id
+
+    let book = {}
+
+  
+    book = books[id]
+
+
+    res.status(200).json(book)
 })
 
 const port = 3000
